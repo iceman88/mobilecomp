@@ -31,6 +31,14 @@
 *   {
 *   }
 */
+
+
+/* Under files its possible to share files
+ * If you click the link you are not able to copy the link :(
+ * This is because the input is marked as "Readonly"
+ * The following lines are used to change the input to R/W
+ * TODO - Not yet working
+*/	
 	/*
 	$(document).ready(function () {
 		  javascript:alert('Verweisziel noch nicht erreichbar') 
@@ -41,16 +49,16 @@
     });
     */
     //hookup the event
+    /*
 	$('#linkText').bind('focus', function() {
 		alert('clicked!');
 		$('#linkText').attr('readonly', false);
 	});
 
 	function RemoveReadonly(){
-		/* $("#linkCheckbox").click(function() { FUNKTIONIER */
+		/* $("#linkCheckbox").click(function() { FUNKTIONIER 
 		$("#linkText").focus(function() {
 			 $(this).trigger('isVisible');
-
         });
 	} //foo()
 	window.setInterval(RemoveReadonly, 100);
@@ -70,13 +78,22 @@
 		});
 	});
     */
-var breite = screen.width;
+    
+    
+    
+    
+    
+/* Get windows width */
+var breite = window.innerWidth;
 
+/* Wait page to be loaded */
 	$(document).ready(function () {
 			
 		if (breite<1080){
+		  /* Implemention of "menu on top" */
+		   
+		    
 		  $("#navigation").hide();
-		
 		  $("#navigation").css("visibility", "visible");
 		  $("#owncloud").click(function(e){
 			e.preventDefault();
@@ -96,16 +113,16 @@ var breite = screen.width;
 		}
 	});
 	
-
-/*
-$(function () {
-    //$(".campaign-box span:last").hide();
-    $("#owncloud").hover(function () { 
-        //$("#navigation").css("opacity", 0.5);
-        $("#navigation").fadeIn("fast");           
-    }, function () {        
-        //$("#navigation").css("opacity", 1); 
-        $("#navigation").hide("slow");
-    });
-});
-*/
+	
+	/*
+	$(function () {
+		//$(".campaign-box span:last").hide();
+		$("#owncloud").hover(function () { 
+			//$("#navigation").css("opacity", 0.5);
+			$("#navigation").fadeIn("fast");           
+		}, function () {        
+			//$("#navigation").css("opacity", 1); 
+			$("#navigation").hide("slow");
+		});
+	});
+	*/
