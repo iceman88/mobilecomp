@@ -31,8 +31,8 @@
 
 	#navigation .icon {
 		display:inline;
-		width: 16px;
-		height: 16px;
+		width: 20px;
+		height: 20px;
 		margin-left: 2px;
 		padding: 0px;
 	}
@@ -182,11 +182,14 @@
 	
 	/* Kleine Dateiaktions-Symbole einblenden */
 	#fileList a.action {
-
+			padding: 17px 8px !important;
 			display: inline-block !important;
 			opacity: 0.5 !important;
 			font-size: 0px;
 			margin-left: 0px !important;
+	}
+	.action[data-action="Edit"] { 
+		font-size: 16px !important; /*Needs content to be aligned, should use an image*/
 	}
 	
 	#fileList a.action.delete {
@@ -213,6 +216,7 @@
 	
 	/* Symbole mittig */
 	.fileactions {
+			background-color: white; /*on really small screens and long item names, these overlap*/
 			top: 0 !important;
 	}
 	
