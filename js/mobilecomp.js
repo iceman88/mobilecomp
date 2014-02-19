@@ -111,7 +111,6 @@ $.fn.waitUntilExists = function(handler, shouldRunHandlerOnce, isChild) {
 
 /* Remove Attribut "Readonly" of Share-Link */
 $("#linkText").waitUntilExists(function(){
-	alert('clicked!');
 	$('#linkText').attr('readonly', false);
 });
 
