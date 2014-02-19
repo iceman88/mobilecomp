@@ -33,55 +33,92 @@
 */
 
 
-/* Under files its possible to share files
- * If you click the link you are not able to copy the link :(
+/* Under Owncloud files its possible to share something
+ * If you click on share a link is displayed
+ * the link is not copieable
  * This is because the input is marked as "Readonly"
- * The following lines are used to change the input to R/W
- * TODO - Not yet working
+ * The following code is used to change the input to R/W
 */	
-	/*
-	$(document).ready(function () {
-		  javascript:alert('Verweisziel noch nicht erreichbar') 
-          $("#dropdown").click(function() {
-			alert('clicked!');
-			$('#linkText').attr('readonly', false);
-          });
-    });
-    */
-    //hookup the event
-    /*
-	$('#linkText').bind('focus', function() {
-		alert('clicked!');
-		$('#linkText').attr('readonly', false);
-	});
 
-	function RemoveReadonly(){
-		/* $("#linkCheckbox").click(function() { FUNKTIONIER 
-		$("#linkText").focus(function() {
-			 $(this).trigger('isVisible');
-        });
-	} //foo()
-	window.setInterval(RemoveReadonly, 100);
+/****************************************************************************
+ * jquery.waituntilexists.js - https://gist.github.com/PizzaBrandon/5709010
+ * *************************************************************************/
+;(function ($, window) {
+ 
+var intervals = {};
+var removeListener = function(selector) {
+ 
+	if (intervals[selector]) {
+		
+		window.clearInterval(intervals[selector]);
+		intervals[selector] = null;
+	}
+};
+var found = 'waitUntilExists.found';
+ 
+/**
+ * @function
+ * @property {object} jQuery plugin which runs handler function once specified
+ *           element is inserted into the DOM
+ * @param {function|string} handler 
+ *            A function to execute at the time when the element is inserted or 
+ *            string "remove" to remove the listener from the given selector
+ * @param {bool} shouldRunHandlerOnce 
+ *            Optional: if true, handler is unbound after its first invocation
+ * @example jQuery(selector).waitUntilExists(function);
+ */
+ 
+$.fn.waitUntilExists = function(handler, shouldRunHandlerOnce, isChild) {
+ 
+	var selector = this.selector;
+	var $this = $(selector);
+	var $elements = $this.not(function() { return $(this).data(found); });
 	
-	/*
-    $(document).ready(function () {
-	javascript:alert('1');
-		/* $('.action[data-action="Share"]').click(function(e){ 
-		/* $("#fileList").click(function() { FUNKTIONIERT 
-		/* $("#my_id .my_class") 
-		$('#dropdown').show('slow', function(){
-			  javascript:alert('Verweisziel noch nicht erreichbar');
-			  $("#dropdown").load(function() {
-				alert('clicked!');
-				$('#linkText').attr('readonly', false);
-			  });
-		});
-	});
-    */
-    
-    
-    
-    
+	if (handler === 'remove') {
+		
+		// Hijack and remove interval immediately if the code requests
+		removeListener(selector);
+	}
+	else {
+ 
+		// Run the handler on all found elements and mark as found
+		$elements.each(handler).data(found, true);
+		
+		if (shouldRunHandlerOnce && $this.length) {
+			
+			// Element was found, implying the handler already ran for all 
+			// matched elements
+			removeListener(selector);
+		}
+		else if (!isChild) {
+			
+			// If this is a recurring search or if the target has not yet been 
+			// found, create an interval to continue searching for the target
+			intervals[selector] = window.setInterval(function () {
+				
+				$this.waitUntilExists(handler, shouldRunHandlerOnce, true);
+			}, 500);
+		}
+	}
+	
+	return $this;
+};
+ 
+}(jQuery, window));
+/****************************************************************************
+ * jquery.waituntilexists.js - https://gist.github.com/PizzaBrandon/5709010
+ * *************************************************************************/
+
+/* Remove Attribut "Readonly" of Share-Link */
+$("#linkText").waitUntilExists(function(){
+	alert('clicked!');
+	$('#linkText').attr('readonly', false);
+});
+
+
+
+
+
     
 /* Get windows width */
 var breite = window.innerWidth;
@@ -90,9 +127,9 @@ var breite = window.innerWidth;
 	$(document).ready(function () {
 			
 		if (breite<1080){
-		  /* Implemention of "menu on top" */
-		   
-		    
+
+		
+		  /* Implemention of "menu on top" */		    
 		  $("#navigation").hide();
 		  $("#navigation").css("visibility", "visible");
 		  $("#owncloud").click(function(e){
