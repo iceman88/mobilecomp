@@ -323,4 +323,10 @@
   .rightcontent { left: 137px !important; }
   .leftcontent { width: 136px !important; }
 }
-
+@media (min-width:500px) and (max-width: 1080px){
+	#contactlist tr td.email { display: table-cell !important; width: 100%;}
+	#contactlist tr td.name { max-width: 270px !important; min-width: 200px !important; width: auto !important;}
+}
+@media (max-width:500px) {
+	#contactlist tr td.email { display: none !important; }
+}
