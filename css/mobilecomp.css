@@ -320,5 +320,7 @@
 		width: 100% !important;
     }
 	
+  .rightcontent { left: 137px !important; }
+  .leftcontent { width: 136px !important; }
 }
 
